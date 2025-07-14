@@ -1,6 +1,7 @@
-import { Interface } from "ethers";
-export default function handler(req, res) {
-  const abi = JSON.parse(process.env.ABI_JSON);
+const { Interface } = require("ethers");
+
+module.exports = (req, res) => {
+  const abi = JSON.parse(process.env.ABI_JSON || "[]");
   const iface = new Interface(abi);
 
   if (req.method !== "POST") {
@@ -19,4 +20,4 @@ export default function handler(req, res) {
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
-}
+};
